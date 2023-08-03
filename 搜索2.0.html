@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Search</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        #search-box {
+            width: 300px;
+            height: 30px;
+            float: left;
+        }
+
+        .search-button {
+            width: 80px;
+            height: 30px;
+            margin-top: 10px;
+            float: left;
+        }
+
+        #all-search-button {
+            width: 50px;
+            height: 30px;
+            margin-top: 10px;
+            margin-left: 5px;
+            float: left;
+        }
+    </style>
+
+    <script>
+        function search(site) {
+            var searchText = document.getElementById('search-box').value;
+            var url;
+            switch (site) {
+                case 'douban':
+                    url = 'https://search.douban.com/movie/subject_search?search_text=' + encodeURIComponent(searchText) + '&cat=1002';
+                    break;
+                case 'rottentomatoes':
+                    url = 'https://www.rottentomatoes.com/search?search=' + encodeURIComponent(searchText);
+                    break;
+                case 'imdb':
+                    url = 'https://www.imdb.com/find?q=' + encodeURIComponent(searchText) + '&ref_=nv_sr_sm';
+                    break;
+            }
+            window.open(url, '_blank');
+        }
+
+        function allSearch() {
+            search('douban');
+            search('rottentomatoes');
+            search('imdb');
+        }
+    </script>
+</head>
+<body>
+    <input id="search-box" type="text" placeholder="输入搜索内容" />
+    <button id="all-search-button" onclick="allSearch()">通搜</button>
+    <button class="search-button" onclick="search('douban')">豆瓣电影</button>
+    <button class="search-button" onclick="search('rottentomatoes')">烂番茄</button>
+    <button class="search-button" onclick="search('imdb')">IMDB</button>
+</body>
+</html>
